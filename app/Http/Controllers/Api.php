@@ -14,10 +14,10 @@ class Api extends Controller
     {
         $location = $request->query('location', 'Rotterdam');
         $apiKey = env('WEATHERMAP_API_KEY');
-        $response = Http::get("http://api.weatherapi.com/v1/current.json?key={$apiKey}&q={$location}");
+        $currentWeather = Http::get("http://api.weatherapi.com/v1/current.json?key={$apiKey}&q={$location}");
 
-        if ($response->successful()) {
-            $data = $response->json();
+        if ($currentWeather->successful()) {
+            $data = $currentWeather->json();
 
             return (view('weather', ['data'=> $data]));
         }

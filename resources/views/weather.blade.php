@@ -1,38 +1,38 @@
 <x-layout>
-    <div id="location-input">
-        <form action="{{route('weather.fetch')}}" method="GET">
-            <input type="text" id="location" name="location" placeholder="Location">
-            <button type="submit">Check</button>
+
+    <div class="flex">
+        <form action="{{route('weather.fetch')}}" method="GET" class="flex gap-4">
+            <input type="text" id="location" name="location" placeholder="Location" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+            {{-- <button type="submit">Check</button> --}}
+            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                Check
+            </button>
         </form>
     </div>
 
-    <div id="weather-data">
-        <table border="1">
-            <tr>
-                <th>Attribute</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td>Location</td>
-                <td>{{ $data['location']['name'] }}, {{ $data['location']['region'] }}, {{ $data['location']['country'] }}</td>
-            </tr>
-            <tr>
-                <td>Temperature (°C)</td>
-                <td>{{ $data['current']['temp_c'] }}</td>
-            </tr>
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <th scope="col" class="px-6 py-3">Attribute</th>
+                <th scope="col" class="px-6 py-3">Value</th>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Location</th>
+                    <td class="px-6 py-4">{{ $data['location']['name'] }}</td>
+                </tr>
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Country</th>
+                    <td class="px-6 py-4">{{ $data['location']['country'] }}</td>
+                </tr>
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Temperature (°C)</th>
+                    <td class="px-6 py-4">{{ $data['current']['temp_c'] }}</td>
+                </tr>
+            </tbody>
         </table>
     </div>
     
-
-
-
-
-
-
-
-    {{-- <script>
-        var jsonData = @json($data);
-
-        document.getElementById('weather-data').innerHTML = JSON.stringify(jsonData, null, 2);
-    </script> --}}
 </x-layout>
