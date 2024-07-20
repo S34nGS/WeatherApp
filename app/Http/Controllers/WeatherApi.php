@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 
 
-class Api extends Controller
+class WeatherApi extends Controller
 {
     
     public function fetchData(Request $request)
