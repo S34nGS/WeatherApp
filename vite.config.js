@@ -9,10 +9,13 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: '0.0.0.0',
+        host: 'localhost',
         port: 5173,
         hmr: {
-          host: '194.61.65.208',
+          host: 'localhost',
         },
       },
+    build: {
+      sourcemap: true, // Ensure source maps are enabled
+    }
 });
