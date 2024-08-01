@@ -5,6 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WeatherApi::class, 'fetchData'])->name('weather.fetch');
 
-Route::get('/test', function() {
+Route::get('/testing', function() {
     return view('testing');
 });
