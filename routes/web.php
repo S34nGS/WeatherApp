@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WeatherApi;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [WeatherApi::class, 'fetchData'])->name('weather.fetch');
+
+Route::get('/testing', function() {
+    return view('testing');
 });
 
 Route::get('/dashboard', function () {
