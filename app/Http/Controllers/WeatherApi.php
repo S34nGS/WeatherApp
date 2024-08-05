@@ -19,7 +19,7 @@ class WeatherApi extends Controller
         if ($currentWeather->successful()) {
             $data = $currentWeather->json();
 
-            return (view('weather', ['data'=> $data]));
+            return view('weather', ['data'=> $data]);
         }
         else {
             abort(500, 'Api call was not succesful');

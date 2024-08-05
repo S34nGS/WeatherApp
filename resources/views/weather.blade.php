@@ -48,9 +48,5 @@
         </div>
     </div>
     @endif
-
-    
-    {{-- Script for dynamically displaying an image based on the weather condition --}}
-    @vite('resources/js/app.js')
     
 </x-layout>
