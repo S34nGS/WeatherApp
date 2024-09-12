@@ -21,17 +21,10 @@ class SavedLocationController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        // $savedLocation->save();
         $savedLocation->user_id = Auth::id();
         $savedLocation->save();
 
-        // return response()->json(['message' => 'Location saved successfully.']);
         return redirect()->back()->with('status', 'Location saved successfully.');
-    }
-
-    public function index()
-    {
-        return Auth::user()->savedLocations;
     }
 
     public function destroy($id)

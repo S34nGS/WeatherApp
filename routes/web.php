@@ -2,13 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WeatherApi;
+use App\Http\Controllers\WeatherApiController;
 use App\Http\Controllers\SavedLocationController;
 
-Route::get('/', [WeatherApi::class, 'fetchData'])->name('weather.fetch');
-// Route::get('/', function() {
-//     return view('weather');
-// })->name('weather.fetch');
+Route::get('/', [WeatherApiController::class, 'fetchData'])->name('weather.fetch');
 
 Route::get('/testing', function() {
     return view('testing');
@@ -26,7 +23,6 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/saved-locations', [SavedLocationController::class, 'store'])->name('savedLocation.store');
-    Route::get('/saved-locations', [SavedLocationController::class, 'index'])->name('savedLocation.index');
     Route::delete('/saved-locations/{id}', [SavedLocationController::class, 'destroy'])->name('savedLocation.destroy');
 });
 

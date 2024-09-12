@@ -10,6 +10,7 @@
     </button>
   <div class="py-4 overflow-y-auto">
       <ul class="space-y-2 font-medium">
+        @auth
          <li>
             <a href="dashboard" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
@@ -20,7 +21,7 @@
             </a>
          </li>
 
-         @auth
+         
             <!-- Modal toggle -->
             <li data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
                 <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -54,7 +55,7 @@
        @endguest
 
        @auth
-           <li>
+            <li>
                <form method="POST" action="{{ route('logout') }}">
                    @csrf
                
@@ -64,8 +65,35 @@
                        {{ __('Log Out') }}
                    </x-responsive-nav-link>
                </form>
-           </li>
+            </li>
+
+            <hr>
+
+            {{-- @if($savedLocations->isEmpty())
+                <p>No saved locations available.</p>
+            @else
+                @foreach($savedLocations as $location)
+                    <tr>
+                        <a href="#">{{ $location->location_country }} {{ $location->location_city }}</a>
+                        <br>
+                        <hr>
+                    </tr>
+                @endforeach
+            @endif --}}
+
+            @foreach($savedLocations as $location)
+                <tr>
+                    <a href="{{ route('weather.fetch', ['country' => $location->location_country, 'city' => $location->location_city]) }}">
+                        {{ $location->location_country }} {{ $location->location_city }}
+                    </a>
+                    <br>
+                    <hr>
+                </tr>
+            @endforeach
+            
        @endauth
+
+
       </ul>
    </div>
 </div>
