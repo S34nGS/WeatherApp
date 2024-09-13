@@ -1,60 +1,15 @@
 <x-layout>
 
-<!-- Modal toggle -->
-<button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-    Location
-  </button>
-  
-  <!-- Main modal -->
-  <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative p-4 w-full max-w-md max-h-full">
-          <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <!-- Modal header -->
-              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                      Choose your location
-                  </h3>
-                  <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                      </svg>
-                      <span class="sr-only">Close modal</span>
-                  </button>
-              </div>
-              <!-- Modal body -->
-              <div class="p-4 md:p-5">
-                  <form class="space-y-4" action="#">
-                      <div>
-                          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+<x-main.search-location></x-main.search-location>
 
-                          <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" required />
-                      </div>
+<x-side.sidebar-button></x-side.sidebar-button>
+ 
+<x-side.sidebar></x-side.sidebar>
 
-                      <div>
-                          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
-
-                          <input type="text" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" required />
-                      </div>
-
-                      <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search location</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
+<x-side.add-location-modal></x-side.add-location-modal>
 
 
-
-
-
-
-
-
-
-
-
-
+@if(isset($data))
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
         <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
@@ -66,23 +21,43 @@
         <tbody>
             <tr class="bg-blue-500 border-b border-blue-400">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Apple MacBook Pro 17"
+                    location
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    {{ $data['location']['name'] }}
                 </td>
             </tr>
             <tr class="bg-blue-500 border-b border-blue-400">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Microsoft Surface Pro
+                    Country
                 </th>
                 <td class="px-6 py-4">
-                    White
+                    {{ $data['location']['country'] }}
+                </td>
+            </tr>
+            <tr class="bg-blue-500 border-b border-blue-400">
+                <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    Temperature (°C)
+                </th>
+                <td class="px-6 py-4">
+                    {{ $data['current']['temp_c'] }}
+                </td>
+            </tr>
+            <tr class="bg-blue-500 border-b border-blue-400">
+                <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                    Condition
+                </th>
+                <td class="px-6 py-4">
+                    {{ $data['current']['condition']['text'] }}
                 </td>
             </tr>
         </tbody>
     </table>
-</div>
 
+    {{-- Display an image based on the weather conditions --}}
+    <div id="weathericon">
+    </div>
+</div>
+@endif
   
 </x-layout>
